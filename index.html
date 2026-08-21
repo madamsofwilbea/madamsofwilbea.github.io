@@ -107,6 +107,80 @@
     margin: 0 auto;
   }
 
+
+  /* ---------- Comments & suggestions ---------- */
+  .say{margin:34px 0 0}
+  .say-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+  .say-head .g-label{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:#2E5D3A}
+  .say-head .g-rule{flex:1;height:1px;background:rgba(218,167,90,.35)}
+  .say-card{background:rgba(255,255,255,.72);border:1px solid rgba(218,167,90,.4);border-radius:16px;padding:18px 16px}
+  .say-intro{font-size:13.5px;color:#3a4740;margin:0 0 14px;line-height:1.6}
+  .say-label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2E5D3A;font-weight:700;margin:0 0 6px}
+  .say-opt{text-transform:none;letter-spacing:0;font-weight:400;color:#6F7A70}
+  .say-card textarea,.say-card input[type=text]{width:100%;box-sizing:border-box;padding:11px 12px;font-family:inherit;font-size:15px;color:#14261C;background:#FBFAF5;border:1px solid #E4DECB;border-radius:10px;outline:none}
+  .say-card textarea{min-height:86px;resize:vertical}
+  .say-card textarea:focus,.say-card input[type=text]:focus{border-color:#2E5D3A;box-shadow:0 0 0 3px rgba(46,93,58,.12)}
+  .say-row{display:flex;gap:10px;margin-top:12px}
+  .say-row>div{flex:1;min-width:0}
+  .say-kinds{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+  .say-kind{flex:1 1 auto;padding:9px 10px;font-family:inherit;font-size:12.5px;font-weight:700;color:#2E5D3A;background:#FBFAF5;border:1px solid #E4DECB;border-radius:9px;cursor:pointer}
+  .say-kind.on{background:#2E5D3A;color:#F7F4EC;border-color:#2E5D3A}
+  .say-share{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:#3a4740;line-height:1.5;cursor:pointer}
+  .say-share input{width:17px;height:17px;margin-top:1px;flex:0 0 auto;accent-color:#2E5D3A}
+  .say-send{width:100%;margin-top:14px;padding:13px;font-family:inherit;font-size:14px;font-weight:700;color:#F7F4EC;background:#2E5D3A;border:none;border-radius:11px;cursor:pointer}
+  .say-send:disabled{background:#9BAA9F;cursor:default}
+  .say-note{font-size:12px;color:#6F7A70;margin:10px 0 0;text-align:center}
+  .say-done{display:none;text-align:center;padding:12px 4px}
+  .say-done h3{font-family:'Playfair Display',serif;color:#0C3125;font-size:19px;margin:0 0 6px}
+  .say-done p{font-size:13.5px;color:#3a4740;margin:0}
+  .wall{margin-top:18px}
+  .wall-item{background:rgba(255,255,255,.6);border:1px solid rgba(218,167,90,.32);border-left:3px solid #DAA75A;border-radius:11px;padding:12px 14px;margin-bottom:9px}
+  .wall-msg{font-size:13.5px;color:#20302a;line-height:1.6;margin:0 0 6px}
+  .wall-by{font-size:11.5px;color:#6F7A70}
+  .wall-by b{color:#2E5D3A}
+
+
+  /* ---------- Dated event cards ---------- */
+  .ev{grid-column:1 / -1;width:100%;display:flex;background:#0C3125;border-radius:15px;overflow:hidden;margin-bottom:11px;
+      text-decoration:none;box-shadow:0 4px 16px rgba(12,49,37,.16);
+      transition:transform .18s ease,box-shadow .18s ease}
+  .ev:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(12,49,37,.22)}
+  .ev-date{flex:0 0 74px;background:#DAA75A;color:#0C3125;display:flex;flex-direction:column;
+           align-items:center;justify-content:center;padding:14px 6px;text-align:center}
+  .ev-mon{font-size:10px;letter-spacing:2px;font-weight:900}
+  .ev-day{font-family:'Playfair Display',serif;font-size:31px;font-weight:800;line-height:1}
+  .ev-cd{font-size:9px;font-weight:700;margin-top:3px;opacity:.82;letter-spacing:.3px}
+  .ev-body{flex:1;padding:14px 15px;min-width:0}
+  .ev-name{font-family:'Playfair Display',serif;font-size:20px;color:#F7F4EC;font-weight:700;margin:0 0 2px}
+  .ev-sub{font-size:12.5px;color:#E8C989;margin:0}
+  .ev-go{font-size:11px;color:rgba(247,244,236,.68);margin:7px 0 0;letter-spacing:.3px}
+  .ev-ic{width:16px;height:16px;stroke:#E8C989;fill:none;stroke-width:1.6;
+         stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px;margin-right:5px}
+
+
+  /* ---------- Two columns on wider screens ---------- */
+  /* On phones this stays a single column, exactly as before. */
+  .cols{display:block}
+  @media (min-width:900px){
+    .page{max-width:920px}
+    .cols{
+      display:grid; grid-template-columns:minmax(0,1fr) 320px;
+      gap:26px; align-items:start;
+    }
+    .cols nav{min-width:0}
+    .say{
+      margin:0;
+      position:sticky; top:22px;
+      align-self:start;
+      max-height:calc(100vh - 44px);
+      overflow-y:auto;
+      /* let the sidebar scroll on its own if it gets tall */
+      scrollbar-width:thin;
+    }
+    .say::-webkit-scrollbar{width:6px}
+    .say::-webkit-scrollbar-thumb{background:rgba(46,93,58,.28);border-radius:99px}
+  }
+
   /* ---------- Links ---------- */
   nav{ display:grid; grid-template-columns:1fr 1fr; gap:13px; }
   /* category headers span the full grid width */
@@ -234,16 +308,11 @@
     </p>
   </header>
 
+  <div class="cols">
   <nav>
     <div class="grp-head"><span class="g-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span class="g-label">Happening Now</span><span class="g-rule"></span></div>
-    <a class="tile wide feature rise" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/">
-      <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg></span></span>
-      <span class="t-main"><span class="t-eyebrow">Watch · Sept 5</span><span class="t-label">The Guardian</span><span class="t-sub">Block screening — register here</span></span>
-    </a>
-    <a class="tile wide feature rise" style="animation-delay:0.4s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/">
-      <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg></span></span>
-      <span class="t-main"><span class="t-eyebrow">Celebrate · Sept 13</span><span class="t-label">The Emerald Gala</span><span class="t-sub">First anniversary — register here</span></span>
-    </a>
+    <a class="ev rise" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
+    <a class="ev rise" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
     <div class="grp-head"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.4h3.4l1.4-2.3h7.4l1.4 2.3h3.4v10.9a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1V8.4Z"/><circle cx="12" cy="13.6" r="3.6"/></svg></span><span class="g-label">Share With Us</span><span class="g-rule"></span></div>
     <a class="tile wide feature rise" style="animation-delay:0.46s" href="https://madamsofwilbea.github.io/memory-box/">
       <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.4h3.4l1.4-2.3h7.4l1.4 2.3h3.4v10.9a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1V8.4Z"/><circle cx="12" cy="13.6" r="3.6"/></svg></span></span>
@@ -270,12 +339,148 @@
     </a>
   </nav>
 
-  <footer class="rise" style="animation-delay:.76s">
+
+  <section class="say rise" style="animation-delay:.74s">
+    <div class="say-head">
+      <span class="g-ic"><svg viewBox="0 0 24 24"><path d="M20.5 14.4a2 2 0 0 1-2 2H8l-4.5 4V5.6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/></svg></span>
+      <span class="g-label">Say Something</span><span class="g-rule"></span>
+    </div>
+
+    <div class="say-card">
+      <div id="sayForm">
+        <p class="say-intro">A kind word, an idea, or something we could do better — we read every one. You don't have to leave your name.</p>
+
+        <label class="say-label">What is it?</label>
+        <div class="say-kinds" id="sayKinds">
+          <button type="button" class="say-kind on" data-kind="A kind word">A kind word</button>
+          <button type="button" class="say-kind" data-kind="A suggestion">A suggestion</button>
+          <button type="button" class="say-kind" data-kind="Something to fix">Something to fix</button>
+        </div>
+
+        <label class="say-label" for="sayMsg" style="margin-top:14px">Your message</label>
+        <textarea id="sayMsg" placeholder="Tell us anything — we're listening"></textarea>
+
+        <div class="say-row">
+          <div>
+            <label class="say-label" for="sayName">Name <span class="say-opt">(optional)</span></label>
+            <input type="text" id="sayName" placeholder="Or stay anonymous">
+          </div>
+          <div>
+            <label class="say-label" for="sayIg">Instagram <span class="say-opt">(optional)</span></label>
+            <input type="text" id="sayIg" placeholder="@handle" autocapitalize="none">
+          </div>
+        </div>
+
+        <label class="say-share">
+          <input type="checkbox" id="sayShare">
+          <span>The Madams' Circle may share this on the hub. We'll only do it if you tick this — and even then we'll only pick a few, so please don't worry either way.</span>
+        </label>
+
+        <button class="say-send" id="saySend">Send it to the Circle</button>
+        <p class="say-note">Suggestions and anything you'd like fixed always stay private.</p>
+      </div>
+
+      <div class="say-done" id="sayDone">
+        <h3>Thank you, Madam 💚</h3>
+        <p>We've got it, and we really do read them all.</p>
+      </div>
+    </div>
+
+    <div class="wall" id="sayWall"></div>
+  </section>
+
+  </div><!-- /cols -->
+
+  <footer class="rise" style="animation-delay:.80s">
     <p class="tagline">A fandom built by the trentahins, a <b>FANmILY</b> open to everyone.</p>
     <p class="signoff">— The Madams' Circle 👑</p>
   </footer>
 
 </div>
 
+
+<script>
+/* ===== Comments & suggestions — paste your Apps Script /exec link below ===== */
+const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEuuriYh5kIukPq8lkHyzYw-RriLOu2ruyxGomeMuHfQThwGexGVvQ/exec";
+/* ========================================================================== */
+(function () {
+  var live = FEEDBACK_URL.indexOf("PASTE_") === -1;
+  var $ = function (id) { return document.getElementById(id); };
+  var kind = "A kind word";
+
+  [].forEach.call(document.querySelectorAll(".say-kind"), function (b) {
+    b.onclick = function () {
+      [].forEach.call(document.querySelectorAll(".say-kind"), function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      kind = b.getAttribute("data-kind");
+    };
+  });
+
+  $("saySend").onclick = function () {
+    var msg = $("sayMsg").value.trim();
+    if (!msg) { $("sayMsg").focus(); return; }
+    var btn = $("saySend");
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    var payload = {
+      kind: kind, message: msg,
+      name: $("sayName").value.trim(),
+      instagram: $("sayIg").value.trim(),
+      mayShare: $("sayShare").checked
+    };
+    var done = function () { $("sayForm").style.display = "none"; $("sayDone").style.display = "block"; };
+    if (!live) { setTimeout(done, 600); return; }
+
+    fetch(FEEDBACK_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(done).catch(function () {
+      btn.disabled = false;
+      btn.textContent = "Send it to the Circle";
+      alert("We couldn't send that just now. Please check your connection and try again.");
+    });
+  };
+
+  function esc(t) {
+    return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  window.__sayWall = function (data) {
+    var list = (data && data.comments) || [];
+    if (!list.length) return;
+    var html = '<div class="say-head"><span class="g-label" style="color:#B8873C">What Madams are saying</span><span class="g-rule"></span></div>';
+    for (var i = 0; i < list.length; i++) {
+      var c = list[i];
+      var by = c.name || "Anonymous";
+      if (c.instagram) by += " \u00b7 " + c.instagram;
+      html += '<div class="wall-item"><p class="wall-msg">\u201c' + esc(c.message) + '\u201d</p>' +
+              '<div class="wall-by">\u2014 <b>' + esc(by) + '</b> \u00b7 ' + esc(c.when || "") + '</div></div>';
+    }
+    $("sayWall").innerHTML = html;
+  };
+
+  if (live) {
+    var sc = document.createElement("script");
+    sc.src = FEEDBACK_URL + "?callback=__sayWall";
+    sc.onerror = function () { /* no wall today, no harm done */ };
+    document.body.appendChild(sc);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var now = new Date();
+  [].forEach.call(document.querySelectorAll('.ev-cd[data-date]'), function(el){
+    var d = new Date(el.getAttribute('data-date') + 'T00:00:00+08:00');
+    var days = Math.ceil((d - now) / 86400000);
+    el.textContent = days > 1 ? days + ' days'
+                   : days === 1 ? 'tomorrow'
+                   : days === 0 ? 'today' : '';
+  });
+})();
+</script>
 </body>
 </html>
