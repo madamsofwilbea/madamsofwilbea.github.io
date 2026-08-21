@@ -463,7 +463,7 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
 
   if (live) {
     var sc = document.createElement("script");
-    sc.src = FEEDBACK_URL + "?callback=__sayWall";
+    sc.src = FEEDBACK_URL + "?callback=__sayWall&t=" + Date.now();  /* the &t= stops phones serving a stale, empty answer from cache */
     sc.onerror = function () { /* no wall today, no harm done */ };
     document.body.appendChild(sc);
   }
