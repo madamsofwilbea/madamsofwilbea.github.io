@@ -181,6 +181,142 @@
     .say::-webkit-scrollbar-thumb{background:rgba(46,93,58,.28);border-radius:99px}
   }
 
+
+  /* ---------- Sub-headings inside Happening Now ---------- */
+  .subsec{
+    grid-column:1 / -1;width:100%;
+    display:flex;align-items:center;gap:8px;margin:16px 0 10px;
+    font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;
+    color:#B8873C;font-weight:900;
+  }
+  .subsec:first-of-type{margin-top:2px}
+  .subsec::after{content:"";flex:1;height:1px;background:rgba(218,167,90,.28)}
+
+  /* ---------- The WilBea Calendar ---------- */
+  .cal{grid-column:1 / -1;width:100%;margin:0}
+  .cal-item{
+    display:flex;align-items:stretch;gap:0;background:#fff;border:1px solid #E4DECB;
+    border-radius:11px;overflow:hidden;margin-bottom:7px;text-decoration:none;
+    transition:transform .16s ease,box-shadow .16s ease;
+  }
+  a.cal-item:hover{transform:translateX(3px);box-shadow:0 4px 12px rgba(12,49,37,.09)}
+  .cal-bar{flex:0 0 4px}
+  .cal-item.bea .cal-bar{background:#C4788A}
+  .cal-item.wil .cal-bar{background:#3F6E8C}
+  .cal-item.both .cal-bar{background:#DAA75A}
+  .cal-when{
+    flex:0 0 54px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:9px 4px;border-right:1px solid #F0EBDD;
+  }
+  .cal-mon{font-size:8.5px;letter-spacing:1.4px;font-weight:900;color:#B8873C}
+  .cal-day{font-family:'Playfair Display',serif;font-size:19px;font-weight:800;color:#0C3125;line-height:1}
+  .cal-body{flex:1;min-width:0;padding:9px 12px;display:flex;flex-direction:column;justify-content:center}
+  .cal-name{font-size:14px;font-weight:700;color:#14261C;margin:0;line-height:1.3}
+  .cal-meta{font-size:11px;color:#6F7A70;margin:2px 0 0}
+  .cal-who{
+    display:inline-block;font-size:8.5px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;
+    padding:2px 6px;border-radius:99px;margin-right:6px;vertical-align:1px;
+  }
+  .cal-item.bea .cal-who{background:rgba(196,120,138,.16);color:#A8566A}
+  .cal-item.wil .cal-who{background:rgba(63,110,140,.16);color:#2F5972}
+  .cal-item.both .cal-who{background:rgba(218,167,90,.22);color:#96702F}
+  .cal-empty{
+    background:rgba(255,255,255,.55);border:1px dashed #E4DECB;border-radius:11px;
+    padding:16px;text-align:center;font-size:12.5px;color:#6F7A70;
+  }
+
+
+  /* ---------- Happening Now: always side-by-side ---------- */
+  .now{margin:0 0 6px}
+  .now-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  .now-col{min-width:0}
+  .now-col .subsec{margin-top:2px}
+  .now .ev{grid-column:auto}
+
+  /* Narrow phones: stack each card's own insides so two columns still read well */
+  @media (max-width:679px){
+    .now-cols{gap:9px}
+    .now .subsec{font-size:8.5px;letter-spacing:1.4px;gap:6px}
+    .now .ev{flex-direction:column;border-radius:12px;margin-bottom:8px}
+    .now .ev-date{
+      flex:none;width:100%;flex-direction:row;gap:6px;padding:5px 9px;
+      justify-content:flex-start;align-items:baseline;
+    }
+    .now .ev-mon{font-size:8.5px;letter-spacing:1.2px}
+    .now .ev-day{font-size:17px}
+    .now .ev-cd{margin:0 0 0 auto;font-size:8.5px}
+    .now .ev-body{padding:7px 10px 8px}
+    .now .ev-name{font-size:15px;line-height:1.2}
+    .now .ev-sub{font-size:11px}
+    .now .ev-go{font-size:10px;margin-top:3px}
+    .now .ev-ic{width:12px;height:12px;margin-right:3px}
+
+    .now .cal-item{flex-direction:column;border-radius:10px;margin-bottom:8px}
+    .now .cal-bar{flex:none;width:100%;height:4px}
+    .now .cal-when{
+      flex:none;width:100%;flex-direction:row;gap:5px;align-items:baseline;
+      justify-content:flex-start;padding:5px 9px 0;border-right:none;
+    }
+    .now .cal-mon{font-size:8px}
+    .now .cal-day{font-size:15px}
+    .now .cal-body{padding:3px 9px 9px}
+    .now .cal-name{font-size:12.5px;line-height:1.3}
+    .now .cal-meta{font-size:9.5px;margin-top:3px}
+    .now .cal-who{font-size:7.5px;padding:1px 5px;margin-right:4px}
+    .now .cal-empty{font-size:11px;padding:12px}
+  }
+
+  @media (min-width:680px){
+    .now-cols{gap:20px}
+    .now .ev-name{font-size:17px}
+    .now .ev-date{flex:0 0 62px}
+    .now .ev-day{font-size:26px}
+  }
+
+
+  /* Every block under Happening Now shares one height, whichever column it's in */
+  .now-cols{align-items:stretch}
+  .now-col{display:flex;flex-direction:column}
+  .now-stack{display:flex;flex-direction:column;gap:8px}
+  /* one shared height for every block, in either column */
+  .now .ev,.now .cal-item{margin-bottom:0;flex:0 0 auto;min-height:100px}
+  .now .ev-body,.now .cal-body{flex:1;justify-content:flex-start}
+  .now .cal-empty{min-height:100px;display:flex;align-items:center;justify-content:center}
+  @media (min-width:680px){
+    .now-stack{gap:11px}
+    .now .ev,.now .cal-item{min-height:104px}
+    .now .cal-empty{min-height:104px}
+  }
+
+
+  /* Keep the calendar tidy until someone asks for the rest */
+  .cal-more{display:none}
+  .cal.open .cal-more{display:flex}
+  .cal-toggle{
+    align-self:flex-start;padding:6px 2px;margin-top:2px;font-family:inherit;
+    font-size:12px;font-weight:700;color:#2E5D3A;background:none;border:none;
+    cursor:pointer;text-decoration:underline;text-decoration-color:#DAA75A;
+    text-underline-offset:4px;text-decoration-thickness:1.5px;
+  }
+  .cal-toggle:hover{color:#0C3125;text-decoration-color:#0C3125}
+  .cal-toggle:focus-visible{outline:2px solid #2E5D3A;outline-offset:3px;border-radius:4px}
+
+
+  /* Several events on one day share a single block */
+  .cal-entry{display:block;text-decoration:none}
+  .cal-entry .cal-name{display:block}
+  .cal-entry .cal-meta{display:block}
+  .now .cal-body{gap:0}
+  .cal-entry + .cal-entry{margin-top:8px;padding-top:8px;border-top:1px solid #F0EBDD}
+  a.cal-entry:hover .cal-name{color:#2E5D3A}
+  .cal-item.mix .cal-bar{background:linear-gradient(180deg,#3F6E8C 0 50%,#C4788A 50% 100%)}
+  .cal-who.bea{background:rgba(196,120,138,.16);color:#A8566A}
+  .cal-who.wil{background:rgba(63,110,140,.16);color:#2F5972}
+  .cal-who.both{background:rgba(218,167,90,.22);color:#96702F}
+  @media (max-width:679px){
+    .cal-item.mix .cal-bar{background:linear-gradient(90deg,#3F6E8C 0 50%,#C4788A 50% 100%)}
+  }
+
   /* ---------- Links ---------- */
   nav{ display:grid; grid-template-columns:1fr 1fr; gap:13px; }
   /* category headers span the full grid width */
@@ -308,11 +444,25 @@
     </p>
   </header>
 
+  <section class="now">
+    <div class="grp-head"><span class="g-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span class="g-label">Happening Now</span><span class="g-rule"></span></div>
+    <div class="now-cols">
+      <div class="now-col">
+      <div class="subsec">Madams’ Official Events</div>
+      <div class="now-stack" id="officialStack">
+      <a class="ev rise" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
+      <a class="ev rise" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
+      </div>
+      </div>
+      <div class="now-col">
+      <div class="subsec">The WilBea Calendar</div>
+      <div class="cal now-stack" id="calendar"></div>
+      </div>
+    </div>
+  </section>
+
   <div class="cols">
   <nav>
-    <div class="grp-head"><span class="g-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span class="g-label">Happening Now</span><span class="g-rule"></span></div>
-    <a class="ev rise" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
-    <a class="ev rise" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
     <div class="grp-head"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.4h3.4l1.4-2.3h7.4l1.4 2.3h3.4v10.9a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1V8.4Z"/><circle cx="12" cy="13.6" r="3.6"/></svg></span><span class="g-label">Share With Us</span><span class="g-rule"></span></div>
     <a class="tile wide feature rise" style="animation-delay:0.46s" href="https://madamsofwilbea.github.io/memory-box/">
       <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.4h3.4l1.4-2.3h7.4l1.4 2.3h3.4v10.9a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1V8.4Z"/><circle cx="12" cy="13.6" r="3.6"/></svg></span></span>
@@ -471,15 +621,172 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
 </script>
 
 <script>
-(function(){
-  var now = new Date();
-  [].forEach.call(document.querySelectorAll('.ev-cd[data-date]'), function(el){
-    var d = new Date(el.getAttribute('data-date') + 'T00:00:00+08:00');
-    var days = Math.ceil((d - now) / 86400000);
-    el.textContent = days > 1 ? days + ' days'
-                   : days === 1 ? 'tomorrow'
-                   : days === 0 ? 'today' : '';
+(function () {
+  // Manila's own "today", as plain text, so no timezone can shift a date
+  var mnl = new Date(Date.now() + (new Date().getTimezoneOffset() + 480) * 60000);
+  var todayText = mnl.getFullYear() + '-' +
+                  ('0' + (mnl.getMonth() + 1)).slice(-2) + '-' +
+                  ('0' + mnl.getDate()).slice(-2);
+
+  var live = 0;
+  [].forEach.call(document.querySelectorAll('.ev'), function (card) {
+    var el = card.querySelector('.ev-cd[data-date]');
+    var when = el && el.getAttribute('data-date');
+
+    // the day after it happens, the card takes itself down
+    if (!when || when < todayText) { card.parentNode.removeChild(card); return; }
+    live++;
+
+    var a = new Date(todayText + 'T00:00:00Z');
+    var bDate = new Date(when + 'T00:00:00Z');
+    var days = Math.round((bDate - a) / 86400000);
+    el.textContent = days > 1 ? days + ' days' : days === 1 ? 'tomorrow' : 'today';
   });
+
+  // nothing left? tuck the whole sub-section away rather than leave a bare heading
+  if (!live) {
+    var stack = document.getElementById('officialStack');
+    if (stack) {
+      var head = stack.previousElementSibling;
+      if (head && head.classList.contains('subsec')) head.style.display = 'none';
+      stack.style.display = 'none';
+      var cols = document.querySelector('.now-cols');
+      if (cols) cols.style.gridTemplateColumns = '1fr';
+    }
+  }
+})();
+</script>
+
+<script>
+/* =====================================================================
+   THE WILBEA CALENDAR
+   Add, edit or remove events in the list below. Each one looks like this:
+
+     { who:"both", date:"2026-09-20", name:"Mall show",
+       where:"SM North EDSA", link:"" }
+
+     who   — "both" (gold), "bea" (rose), or "wil" (blue)
+     date  — year-month-day, always four-two-two
+     name  — what it is
+     where — place or channel (optional)
+     link  — a web address, or "" for none
+
+   Past events disappear on their own the day after they happen.
+   ===================================================================== */
+var WILBEA_EVENTS = [
+  { who:"wil", date:"2026-09-06", name:"Adlikhain Heroverse Grand Launch",
+    where:"Super Manila Comic Con \u00b7 One Ayala, Makati", link:"" },
+
+  { who:"bea", date:"2026-09-11", name:"Bea-yond The Years: The Fan Experience",
+    where:"Teatrino Promenade, Greenhills", link:"" },
+
+  { who:"bea", date:"2026-09-12", name:"EC-VIT Hunt with Bea",
+    where:"Selected Mercury Drug branches", link:"" },
+
+  { who:"wil", date:"2026-09-12", name:"Adlikhain Heroverse Launch at MIBF",
+    where:"SMX Convention Center, MOA Complex, Pasay", link:"" },
+
+  { who:"wil", date:"2026-10-10", name:"Wrten by Wilbert Ross \u2014 Cebu",
+    where:"10th Anniversary Homecoming Concert \u00b7 Waterfront Cebu City Hotel", link:"" },
+
+  { who:"wil", date:"2026-10-25", name:"Wrten by Wilbert Ross \u2014 Davao",
+    where:"10th Anniversary Homecoming Concert \u00b7 SMX Davao, SM Lanang Premier", link:"" },
+
+  { who:"bea", date:"2026-11-14", name:"EC-VIT Hunt with Bea",
+    where:"Selected Mercury Drug branches", link:"" },
+
+  { who:"bea", date:"2026-12-05", name:"EC-VIT Hunt with Bea",
+    where:"Selected Mercury Drug branches", link:"" }
+];
+/* ===================================================================== */
+
+(function () {
+  var box = document.getElementById('calendar');
+  if (!box) return;
+
+  var MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  var LABEL = { both:'WilBea', bea:'Bea', wil:'Wilbert' };
+
+  // Manila's own "today", as plain text, so no timezone can shift a date
+  var mnl = new Date(Date.now() + (new Date().getTimezoneOffset() + 480) * 60000);
+  var todayText = mnl.getFullYear() + '-' +
+                  ('0' + (mnl.getMonth() + 1)).slice(-2) + '-' +
+                  ('0' + mnl.getDate()).slice(-2);
+
+  var list = WILBEA_EVENTS.filter(function (e) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayText;
+  }).sort(function (a, b) {
+    return a.date < b.date ? -1 : 1;
+  });
+
+  if (!list.length) {
+    box.innerHTML = '<div class="cal-empty">Nothing on the calendar just yet — ' +
+                    'we\u2019ll add things here as they\u2019re announced. \uD83D\uDC9A</div>';
+    return;
+  }
+
+  function esc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  var SHOW = 3;                    // how many date blocks before "See more"
+
+  // gather anything on the same day into one block
+  var days = [], byDate = {};
+  list.forEach(function (e) {
+    if (!byDate[e.date]) { byDate[e.date] = { date: e.date, items: [] }; days.push(byDate[e.date]); }
+    byDate[e.date].items.push(e);
+  });
+
+  var html = '';
+  days.forEach(function (day, idx) {
+    var parts = day.date.split('-');
+    var monText = MON[parseInt(parts[1], 10) - 1];
+    var dayText = parseInt(parts[2], 10);
+
+    // one colour when the day belongs to one of them, a split bar when it's both
+    var seen = {};
+    day.items.forEach(function (e) {
+      seen[(e.who === 'bea' || e.who === 'wil') ? e.who : 'both'] = true;
+    });
+    var keys = [];
+    for (var k in seen) { if (seen.hasOwnProperty(k)) keys.push(k); }
+    var barClass = (keys.length === 1) ? keys[0] : 'mix';
+
+    var rows = '';
+    day.items.forEach(function (e) {
+      var who = (e.who === 'bea' || e.who === 'wil') ? e.who : 'both';
+      var body =
+        '<span class="cal-name">' + esc(e.name) + '</span>' +
+        '<span class="cal-meta"><span class="cal-who ' + who + '">' + LABEL[who] + '</span>' +
+        (e.where ? esc(e.where) : '') + '</span>';
+      rows += e.link
+        ? '<a class="cal-entry" href="' + esc(e.link) + '">' + body + '</a>'
+        : '<div class="cal-entry">' + body + '</div>';
+    });
+
+    html += '<div class="cal-item ' + barClass + (idx >= SHOW ? ' cal-more' : '') + '">' +
+              '<span class="cal-bar"></span>' +
+              '<span class="cal-when"><span class="cal-mon">' + monText + '</span>' +
+              '<span class="cal-day">' + dayText + '</span></span>' +
+              '<span class="cal-body">' + rows + '</span>' +
+            '</div>';
+  });
+
+  if (days.length > SHOW) {
+    html += '<button type="button" class="cal-toggle" id="calToggle">' +
+            'See the full calendar \u2192</button>';
+  }
+  box.innerHTML = html;
+
+  var tog = document.getElementById('calToggle');
+  if (tog) {
+    tog.onclick = function () {
+      var open = box.classList.toggle('open');
+      tog.textContent = open ? 'Show less \u2191' : 'See the full calendar \u2192';
+    };
+  }
 })();
 </script>
 </body>
