@@ -317,6 +317,22 @@
     .cal-item.mix .cal-bar{background:linear-gradient(90deg,#3F6E8C 0 50%,#C4788A 50% 100%)}
   }
 
+
+  /* ---------- Sold out / closed badges ---------- */
+  .ev-badge{
+    display:inline-block;font-size:8.5px;font-weight:900;letter-spacing:1.1px;
+    text-transform:uppercase;padding:3px 8px;border-radius:99px;margin-left:7px;
+    vertical-align:2px;
+  }
+  .ev.is-soldout .ev-badge{background:#C46A5C;color:#fff}
+  .ev.is-closed  .ev-badge{background:rgba(247,244,236,.18);color:#E8C989;border:1px solid rgba(232,201,137,.45)}
+  .ev.is-soldout,.ev.is-closed{opacity:.82}
+  .ev.is-soldout .ev-date,.ev.is-closed .ev-date{filter:grayscale(.35)}
+  .ev.is-soldout .ev-go,.ev.is-closed .ev-go{color:rgba(247,244,236,.5)}
+  @media (max-width:679px){
+    .ev-badge{margin-left:0;margin-top:3px;display:block;width:fit-content;font-size:8px}
+  }
+
   /* ---------- Links ---------- */
   nav{ display:grid; grid-template-columns:1fr 1fr; gap:13px; }
   /* category headers span the full grid width */
@@ -450,8 +466,8 @@
       <div class="now-col">
       <div class="subsec">Madams’ Official Events</div>
       <div class="now-stack" id="officialStack">
-      <a class="ev rise" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
-      <a class="ev rise" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
+      <a class="ev rise" data-status="" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
+      <a class="ev rise" data-status="" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
       </div>
       </div>
       <div class="now-col">
@@ -621,6 +637,14 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
 </script>
 
 <script>
+/* =====================================================================
+   EVENT STATUS SWITCH
+   On each event card above you'll find  data-status=""
+     data-status=""         open, register normally
+     data-status="soldout"  shows a red SOLD OUT badge
+     data-status="closed"   shows a gold CLOSED badge (registration paused)
+   Nothing else to change.
+   ===================================================================== */
 (function () {
   // Manila's own "today", as plain text, so no timezone can shift a date
   var mnl = new Date(Date.now() + (new Date().getTimezoneOffset() + 480) * 60000);
@@ -636,6 +660,27 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
     // the day after it happens, the card takes itself down
     if (!when || when < todayText) { card.parentNode.removeChild(card); return; }
     live++;
+
+    // registration status: "soldout", "closed", or blank for open
+    var status = (card.getAttribute('data-status') || '').toLowerCase().trim();
+    if (status === 'soldout' || status === 'closed') {
+      card.classList.add(status === 'soldout' ? 'is-soldout' : 'is-closed');
+      var name = card.querySelector('.ev-name');
+      if (name) {
+        var tag = document.createElement('span');
+        tag.className = 'ev-badge';
+        tag.textContent = status === 'soldout' ? 'Sold out' : 'Closed';
+        name.appendChild(tag);
+      }
+      var go = card.querySelector('.ev-go');
+      if (go) {
+        var icon = go.querySelector('svg');
+        go.textContent = status === 'soldout'
+          ? 'Registration is full'
+          : 'Registration is paused';
+        if (icon) go.insertBefore(icon, go.firstChild);
+      }
+    }
 
     var a = new Date(todayText + 'T00:00:00Z');
     var bDate = new Date(when + 'T00:00:00Z');
@@ -688,6 +733,9 @@ var WILBEA_EVENTS = [
 
   { who:"wil", date:"2026-10-10", name:"Wrten by Wilbert Ross \u2014 Cebu",
     where:"10th Anniversary Homecoming Concert \u00b7 Waterfront Cebu City Hotel", link:"" },
+
+  { who:"bea", date:"2026-10-24", name:"EC-VIT Hunt with Bea",
+    where:"Selected Mercury Drug branches", link:"" },
 
   { who:"wil", date:"2026-10-25", name:"Wrten by Wilbert Ross \u2014 Davao",
     where:"10th Anniversary Homecoming Concert \u00b7 SMX Davao, SM Lanang Premier", link:"" },
