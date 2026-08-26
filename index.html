@@ -984,18 +984,24 @@ var WILBEA_EVENTS = [
       items.push(copy);
     });
 
-    var hold = function () { held = Date.now(); };
+    var pos = 0, lastSet = -1;
+
+    var hold = function () { held = Date.now(); pos = track.scrollLeft; };
     ['pointerdown', 'touchstart', 'wheel', 'mouseenter', 'focusin'].forEach(function (ev) {
       track.addEventListener(ev, hold, { passive: true });
     });
-    track.addEventListener('scroll', hold, { passive: true });
+    track.addEventListener('scroll', function () {
+      if (Math.abs(track.scrollLeft - lastSet) > 2) hold();
+    }, { passive: true });
 
     var drift = function () {
       if (!loopDist && items.length > 8) loopDist = items[8].offsetLeft - items[0].offsetLeft;
       var idle = Date.now() - held > 2600;
-      if (loopDist && idle && !active && !document.hidden) {
-        track.scrollLeft += 0.4;
-        if (track.scrollLeft >= loopDist) track.scrollLeft -= loopDist;
+      if (loopDist > 0 && idle && !active && !document.hidden) {
+        pos += 0.4;
+        if (pos >= loopDist) pos -= loopDist;
+        track.scrollLeft = pos;
+        lastSet = track.scrollLeft;
       }
       requestAnimationFrame(drift);
     };
