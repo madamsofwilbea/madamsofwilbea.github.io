@@ -440,22 +440,21 @@
 
 
   /* ---------- Header + film strip stay put ---------- */
-  .topfix{
-    position:sticky; top:0; z-index:60;
-    margin:-40px -20px 0; padding:16px 20px 10px;
-    background:var(--ivory);
-    transition:box-shadow .2s ease, padding .2s ease;
-  }
+  /* On phones the header scrolls away normally. */
   .topfix .roul{ margin-bottom:0; }
-  .topfix.compact{ box-shadow:0 10px 20px -8px rgba(35,71,44,.22); padding-top:8px; }
-  .topfix .logo, .topfix h1{ transition:width .22s ease, font-size .22s ease, margin .22s ease; }
-  .topfix.compact .logo{ width:64px; max-width:22%; margin-bottom:6px; }
-  .topfix.compact h1{ font-size:22px; }
-  .topfix.compact header{ margin-bottom:12px; }
-  .topfix.compact .rule, .topfix.compact .intro, .topfix.compact .roul-hint{ display:none; }
-  @media (max-width:679px){
-    .topfix.compact .logo{ width:52px; }
-    .topfix.compact h1{ font-size:19px; }
+  @media (min-width:900px){
+    .topfix{
+      position:sticky; top:0; z-index:60;
+      margin:-40px -20px 0; padding:16px 20px 10px;
+      background:var(--ivory);
+      transition:box-shadow .2s ease, padding .2s ease;
+    }
+    .topfix.compact{ box-shadow:0 10px 20px -8px rgba(35,71,44,.22); padding-top:8px; }
+    .topfix .logo, .topfix h1{ transition:width .22s ease, font-size .22s ease, margin .22s ease; }
+    .topfix.compact .logo{ width:64px; max-width:22%; margin-bottom:6px; }
+    .topfix.compact h1{ font-size:22px; }
+    .topfix.compact header{ margin-bottom:12px; }
+    .topfix.compact .rule, .topfix.compact .intro, .topfix.compact .roul-hint{ display:none; }
   }
 
   /* ---------- Section roulette ---------- */
@@ -495,15 +494,6 @@
   .roul-item.on .r-eyebrow{ color:#7A6531; }
   .roul-item.on .r-ic{ color:var(--green); }
   .roul-hint{ text-align:center; font-size:10.5px; letter-spacing:.06em; color:#8B9A8F; margin-top:9px; }
-  .roul-arrow{
-    display:none; position:absolute; top:50%; transform:translateY(-50%); z-index:3;
-    width:32px; height:32px; border-radius:50%; cursor:pointer;
-    background:var(--white); border:1px solid rgba(218,167,90,.5); color:var(--green);
-    box-shadow:0 4px 12px rgba(35,71,44,.14);
-    align-items:center; justify-content:center; font-size:15px; line-height:1;
-  }
-  .roul-arrow.l{ left:-15px; } .roul-arrow.r{ right:-15px; }
-  @media (min-width:900px){ .roul-arrow{ display:flex; } }
 
   /* ---------- One section at a time ---------- */
   body.focused .cols{ display:block; }
@@ -546,8 +536,6 @@
   </header>
 
   <div class="roul rise" style="animation-delay:.32s">
-    <button type="button" class="roul-arrow l" id="roulPrev" aria-label="Scroll left">‹</button>
-    <button type="button" class="roul-arrow r" id="roulNext" aria-label="Scroll right">›</button>
     <div class="roul-film">
     <div class="roul-track" id="roulTrack">
       <button type="button" class="roul-item" data-target="p1"><span class="r-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span class="r-eyebrow">Happening now</span><span class="r-label">Madams’ Official Events</span></button>
@@ -982,8 +970,9 @@ var WILBEA_EVENTS = [
     centre(b);
     if (active) {
       var anchor = document.getElementById('contentTop');
-      var fix = document.getElementById('topfix');
-      var y = (anchor ? anchor.offsetTop : 0) - (fix ? fix.offsetHeight : 0) - 6;
+      var band = document.getElementById('topfix');
+      var lift = (band && getComputedStyle(band).position === 'sticky') ? band.offsetHeight + 6 : 12;
+      var y = (anchor ? anchor.offsetTop : 0) - lift;
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
   }
@@ -1034,20 +1023,15 @@ var WILBEA_EVENTS = [
     requestAnimationFrame(drift);
   }
 
-  var prev = document.getElementById('roulPrev'), next = document.getElementById('roulNext');
-  function nudge(dir) {
-    var d = dir * (track.clientWidth * 0.7);
-    if (track.scrollBy) track.scrollBy({ left: d, behavior: 'smooth' });
-    else track.scrollLeft += d;
-  }
-  if (prev) prev.addEventListener('click', function () { nudge(-1); });
-  if (next) next.addEventListener('click', function () { nudge(1); });
-
   var fix = document.getElementById('topfix');
+  function pinned() {
+    return !!fix && getComputedStyle(fix).position === 'sticky';
+  }
   function measure() {
     if (!fix) return;
-    fix.classList.toggle('compact', window.pageYOffset > 30);
-    document.documentElement.style.setProperty('--fixH', fix.offsetHeight + 'px');
+    var on = pinned();
+    fix.classList.toggle('compact', on && window.pageYOffset > 30);
+    document.documentElement.style.setProperty('--fixH', on ? fix.offsetHeight + 'px' : '0px');
   }
   window.addEventListener('scroll', measure, { passive: true });
   window.addEventListener('resize', measure);
