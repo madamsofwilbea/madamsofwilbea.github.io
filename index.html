@@ -329,6 +329,8 @@
   .ev.is-soldout,.ev.is-closed{opacity:.82}
   .ev.is-soldout .ev-date,.ev.is-closed .ev-date{filter:grayscale(.35)}
   .ev.is-soldout .ev-go,.ev.is-closed .ev-go{color:rgba(247,244,236,.5)}
+  .ev.is-soldout{cursor:default}
+  .ev.is-soldout:hover{transform:none;box-shadow:none}
   @media (max-width:679px){
     .ev-badge{margin-left:0;margin-top:3px;display:block;width:fit-content;font-size:8px}
   }
@@ -769,6 +771,11 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
         tag.textContent = status === 'soldout' ? 'Sold out' : 'Closed';
         name.appendChild(tag);
       }
+      // a full event has nothing left to register for, so the card stops being a link
+      if (status === 'soldout') {
+        card.removeAttribute('href');
+        card.setAttribute('aria-disabled', 'true');
+      }
       var go = card.querySelector('.ev-go');
       if (go) {
         var icon = go.querySelector('svg');
@@ -816,6 +823,15 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
    Past events disappear on their own the day after they happen.
    ===================================================================== */
 var WILBEA_EVENTS = [
+  { who:"wil", date:"2026-08-31", name:"The Guardian Premiere Night",
+    where:"Robinsons Galleria", link:"" },
+
+  { who:"wil", date:"2026-09-02", name:"The Guardian Opening Day",
+    where:"Selected cinemas nationwide", link:"" },
+
+  { who:"wil", date:"2026-09-05", name:"The Guardian Exclusive Block Screening by Madams of WilBea",
+    where:"The Director\u2019s Club, The Podium", link:"" },
+
   { who:"wil", date:"2026-09-06", name:"Adlikhain Heroverse Grand Launch",
     where:"Super Manila Comic Con \u00b7 One Ayala, Makati", link:"" },
 
