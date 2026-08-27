@@ -441,23 +441,14 @@
   .rise{ opacity:0; transform: translateY(14px); animation: rise .6s ease forwards; }
 
 
-  /* ---------- Header + film strip stay put ---------- */
-  /* On phones the header scrolls away normally. */
+  /* ---------- Header + film strip scroll away normally ---------- */
+  /* The header used to stay pinned on wide screens. It now scrolls off like
+     everything else, on phones and desktop alike. To bring the pin back,
+     restore a @media (min-width:900px) block that gives .topfix
+     position:sticky and top:0. The script below handles either case on its
+     own — it checks whether .topfix is actually sticky before it does any
+     of its measuring. */
   .topfix .roul{ margin-bottom:0; }
-  @media (min-width:900px){
-    .topfix{
-      position:sticky; top:0; z-index:60;
-      margin:-40px -20px 0; padding:16px 20px 10px;
-      background:var(--ivory);
-      transition:box-shadow .2s ease, padding .2s ease;
-    }
-    .topfix.compact{ box-shadow:0 10px 20px -8px rgba(35,71,44,.22); padding-top:8px; }
-    .topfix .logo, .topfix h1{ transition:width .22s ease, font-size .22s ease, margin .22s ease; }
-    .topfix.compact .logo{ width:64px; max-width:22%; margin-bottom:6px; }
-    .topfix.compact h1{ font-size:22px; }
-    .topfix.compact header{ margin-bottom:12px; }
-    .topfix.compact .rule, .topfix.compact .intro, .topfix.compact .roul-hint{ display:none; }
-  }
 
   /* ---------- Section roulette ---------- */
   .roul{ position:relative; margin:0 0 24px; }
