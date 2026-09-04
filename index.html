@@ -149,6 +149,7 @@
            align-items:center;justify-content:center;padding:14px 6px;text-align:center}
   .ev-mon{font-size:10px;letter-spacing:2px;font-weight:900}
   .ev-day{font-family:'Playfair Display',serif;font-size:31px;font-weight:800;line-height:1}
+  .ev-day.tba{font-size:19px;letter-spacing:1px}
   .ev-cd{font-size:9px;font-weight:700;margin-top:3px;opacity:.82;letter-spacing:.3px}
   .ev-body{flex:1;padding:14px 15px;min-width:0}
   .ev-name{font-family:'Playfair Display',serif;font-size:20px;color:#F7F4EC;font-weight:700;margin:0 0 2px}
@@ -244,6 +245,7 @@
     }
     .now .ev-mon{font-size:8.5px;letter-spacing:1.2px}
     .now .ev-day{font-size:17px}
+    .now .ev-day.tba{font-size:11.5px;letter-spacing:.5px}
     .now .ev-cd{margin:0 0 0 auto;font-size:8.5px}
     .now .ev-body{padding:7px 10px 8px}
     .now .ev-name{font-size:15px;line-height:1.2}
@@ -555,6 +557,8 @@
       <!-- GUARDIAN BLOCK SCREENING — to reopen it, change data-status="soldout" back to data-status="" -->
       <a class="ev rise" data-status="soldout" style="animation-delay:0.34s" href="https://madamsofwilbea.github.io/guardian-screening/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">5</div><div class="ev-cd" data-date="2026-09-05"></div></div><div class="ev-body"><p class="ev-name">The Guardian</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M3.5 9.4h17v10a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-10Z"/><path d="M3.7 9.4 4.9 4.2l14.9 1.7-.6 3.5"/><path d="m8.6 9.4 1-4.6M13.4 9.4l1-4.3"/></svg>Register here →</p></div></a>
       <a class="ev rise" data-status="" style="animation-delay:0.40s" href="https://madamsofwilbea.github.io/emerald-gala-1st-anniv/"><div class="ev-date"><div class="ev-mon">SEP</div><div class="ev-day">13</div><div class="ev-cd" data-date="2026-09-13"></div></div><div class="ev-body"><p class="ev-name">The Emerald Gala</p><p class="ev-sub">First anniversary</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M7.5 3.5h9l4 5.5-8.5 11.5L3.5 9l4-5.5Z"/><path d="M3.5 9h17M12 20.5 8.6 9l1.4-5.5M12 20.5 15.4 9 14 3.5"/></svg>Register here →</p></div></a>
+      <!-- PEE MAK BLOCK SCREENING — date not confirmed yet. Once the cinema is booked: replace TBA with the day number and delete the word tba from class="ev-day tba", put the real date in data-date, and delete data-tba="true" so the countdown comes back. -->
+      <a class="ev rise" data-status="" data-tba="true" style="animation-delay:0.46s" href="https://madamsofwilbea.github.io/peemak-screening/"><div class="ev-date"><div class="ev-mon">OCT</div><div class="ev-day tba">TBA</div><div class="ev-cd" data-date="2026-10-31"></div></div><div class="ev-body"><p class="ev-name">Pee Mak</p><p class="ev-sub">Block screening</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M5.5 20.6V10.2a6.5 6.5 0 0 1 13 0v10.4l-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5-2.3-1.5Z"/><path d="M9.7 10.4v1.3M14.3 10.4v1.3"/></svg>Pre-register here →</p></div></a>
       </div>
       </div>
       <div class="now-col" data-panel="p2">
@@ -743,6 +747,10 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
      data-status="soldout"  shows a red SOLD OUT badge
      data-status="closed"   shows a gold CLOSED badge (registration paused)
    Nothing else to change.
+
+   A card with  data-tba="true"  has no confirmed date yet: the
+   countdown line is left empty. Keep a placeholder date in
+   data-date (end of the expected month) so the card doesn't vanish.
    ===================================================================== */
 (function () {
   // Manila's own "today", as plain text, so no timezone can shift a date
@@ -785,6 +793,9 @@ const FEEDBACK_URL = "https://script.google.com/macros/s/AKfycbya2sgrOXIYP6e4MEu
         if (icon) go.insertBefore(icon, go.firstChild);
       }
     }
+
+    // a card marked data-tba="true" has no confirmed date yet, so the countdown line stays empty
+    if (card.hasAttribute('data-tba')) { el.textContent = ''; return; }
 
     var a = new Date(todayText + 'T00:00:00Z');
     var bDate = new Date(when + 'T00:00:00Z');
