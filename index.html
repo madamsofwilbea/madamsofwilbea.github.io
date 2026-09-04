@@ -512,9 +512,100 @@
     .rise{ animation:none; opacity:1; transform:none; }
     .card, .arrow{ transition:none; }
   }
+  /* ---------- Pee Mak seasonal skin (October) ---------- */
+  /* THE SKIN SWITCH is on the <body> tag a little further down:
+       <body data-skin="peemak">  = the October Pee Mak night look
+       <body data-skin="madams">  = the usual emerald-and-gold look
+     Change that one word and the whole page follows. The colours below are
+     taken from the Pee Mak pre-registration site so the two read as one
+     campaign. Nothing else needs editing. */
+  body[data-skin="peemak"]{
+    --green:      #1E4028;
+    --green-deep: #07190F;
+    --gold:       #DAA75A;
+    --gold-soft:  #E8C989;
+    --ivory:      #07190F;
+    --ivory-warm: #0F2A1A;
+    color:#F7F4EC;
+    background-image:
+      radial-gradient(circle at 50% -8%, rgba(30,64,40,.60), transparent 62%),
+      radial-gradient(ellipse at 50% 108%, rgba(218,167,90,.13), transparent 55%);
+  }
+  /* title, intro, footer */
+  body[data-skin="peemak"] .brand{ color:var(--gold-soft); opacity:.82 }
+  body[data-skin="peemak"] h1{ color:#F5EFE0; text-shadow:0 2px 30px rgba(218,167,90,.35) }
+  body[data-skin="peemak"] .rule{ box-shadow:0 0 12px rgba(218,167,90,.7) }
+  body[data-skin="peemak"] .intro,
+  body[data-skin="peemak"] .tagline{ color:#AFC2B2 }
+  body[data-skin="peemak"] .signoff{ color:var(--gold-soft) }
+  body[data-skin="peemak"] footer{ border-top-color:rgba(218,167,90,.18) }
+  body[data-skin="peemak"] .grp-head .g-label,
+  body[data-skin="peemak"] .say-head .g-label{ color:var(--gold-soft) }
+  body[data-skin="peemak"] .about-link{ color:var(--gold-soft); background:#0F2A1A }
+  body[data-skin="peemak"] .about-link:hover{ background:#153823 }
+  /* the film strip: keep the sprocket holes light so they still read */
+  body[data-skin="peemak"] .roul-film{
+    background:
+      repeating-linear-gradient(90deg, transparent 0 7px, #E9E2CE 7px 17px) left 0 top 6px / 100% 9px no-repeat,
+      repeating-linear-gradient(90deg, transparent 0 7px, #E9E2CE 7px 17px) left 0 bottom 6px / 100% 9px no-repeat,
+      #0B2216;
+    box-shadow: inset 0 0 0 1px rgba(218,167,90,.34), 0 10px 24px rgba(0,0,0,.35);
+  }
+  body[data-skin="peemak"] .roul-item{
+    background:#0F2A1A; color:#F7F4EC;
+    box-shadow:0 6px 16px rgba(0,0,0,.45), inset 0 1px 0 rgba(232,201,137,.10);
+  }
+  body[data-skin="peemak"] .roul-item .r-label,
+  body[data-skin="peemak"] .roul-item.on .r-label{ color:#F7F4EC }
+  body[data-skin="peemak"] .roul-item.on{ background:#1E4028 }
+  /* event cards and tiles */
+  body[data-skin="peemak"] .ev{ background:#0F2A1A; box-shadow:0 6px 20px rgba(0,0,0,.40) }
+  body[data-skin="peemak"] .tile,
+  body[data-skin="peemak"] .tile.feature,
+  body[data-skin="peemak"] .sh-forest,
+  body[data-skin="peemak"] .sh-green,
+  body[data-skin="peemak"] .sh-sage,
+  body[data-skin="peemak"] .sh-ivory,
+  body[data-skin="peemak"] .sh-cream{
+    background:linear-gradient(150deg,#0F2A1A,#1E4028 62%);
+    border-color:rgba(218,167,90,.6);
+    box-shadow:0 6px 22px rgba(0,0,0,.38);
+  }
+  body[data-skin="peemak"] .tile:hover,
+  body[data-skin="peemak"] .tile:focus-visible{ box-shadow:0 16px 34px rgba(218,167,90,.26) }
+  /* the WilBea calendar */
+  body[data-skin="peemak"] .cal-item{ background:#0F2A1A; border-color:rgba(218,167,90,.28) }
+  body[data-skin="peemak"] a.cal-item:hover{ box-shadow:0 4px 12px rgba(0,0,0,.4) }
+  body[data-skin="peemak"] .cal-when{ border-right-color:rgba(218,167,90,.18) }
+  body[data-skin="peemak"] .cal-mon{ color:var(--gold-soft) }
+  body[data-skin="peemak"] .cal-day,
+  body[data-skin="peemak"] .cal-name{ color:#F7F4EC }
+  body[data-skin="peemak"] .cal-meta{ color:#9DB0A2 }
+  body[data-skin="peemak"] .cal-empty{ background:rgba(15,42,26,.55); border-color:rgba(218,167,90,.25); color:#9DB0A2 }
+  body[data-skin="peemak"] .cal-toggle{ color:var(--gold-soft) }
+  body[data-skin="peemak"] .cal-toggle:hover{ color:#F7F4EC; text-decoration-color:#F7F4EC }
+  /* say something */
+  body[data-skin="peemak"] .say-card{ background:rgba(15,42,26,.72); border-color:rgba(218,167,90,.30) }
+  body[data-skin="peemak"] .say-intro,
+  body[data-skin="peemak"] .say-share,
+  body[data-skin="peemak"] .say-note,
+  body[data-skin="peemak"] .say-opt{ color:#9DB0A2 }
+  body[data-skin="peemak"] .say-label{ color:var(--gold-soft) }
+  body[data-skin="peemak"] .say-card textarea,
+  body[data-skin="peemak"] .say-card input[type=text]{ background:#07190F; color:#F7F4EC; border-color:rgba(218,167,90,.30) }
+  body[data-skin="peemak"] .say-card textarea:focus,
+  body[data-skin="peemak"] .say-card input[type=text]:focus{ border-color:#DAA75A; box-shadow:0 0 0 3px rgba(218,167,90,.18) }
+  body[data-skin="peemak"] .say-kind{ background:#07190F; color:#E8C989; border-color:rgba(218,167,90,.30) }
+  body[data-skin="peemak"] .say-kind.on{ background:#DAA75A; color:#07190F; border-color:#DAA75A }
+  body[data-skin="peemak"] .say-send{ background:#DAA75A; color:#07190F }
+  body[data-skin="peemak"] .say-send:disabled{ background:#33463A; color:#8FA294 }
+  body[data-skin="peemak"] .say-head .g-rule{ background:rgba(218,167,90,.4) }
+  /* the Pee Mak card, picking up the film's blush accent */
+  body[data-skin="peemak"] .ev[data-tba]{ box-shadow:0 0 0 1px rgba(233,162,168,.45), 0 10px 30px rgba(0,0,0,.45) }
+  body[data-skin="peemak"] .ev[data-tba] .ev-sub{ color:#E9A2A8 }
 </style>
 </head>
-<body>
+<body data-skin="madams"><!-- SKIN SWITCH: "peemak" = October look, "madams" = the usual emerald-and-gold look -->
 
 <div class="page">
 
@@ -539,6 +630,7 @@
       <button type="button" class="roul-item" data-target="p4"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M4 18h16M4.6 18 3 8.4l5.2 3.9L12 5l3.8 7.3L21 8.4 19.4 18"/></svg></span><span class="r-eyebrow">Be a Madam</span><span class="r-label">Membership Form</span></button>
       <button type="button" class="roul-item" data-target="p5"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M12 20.5S4 16 4 10.6A3.9 3.9 0 0 1 12 8.4a3.9 3.9 0 0 1 8 2.2c0 5.4-8 9.9-8 9.9Z"/></svg></span><span class="r-eyebrow">Be a Madam</span><span class="r-label">The Madams’ Vault</span></button>
       <button type="button" class="roul-item" data-target="p6"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12.5h-11L5.5 8Z"/><path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3"/></svg></span><span class="r-eyebrow">Shop</span><span class="r-label">Merch Drop</span><!-- was "Shop &amp; Play" / "Merch &amp; Bidding" while the Bidding Table was showing --></button>
+      <button type="button" class="roul-item" data-target="p9"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M8.5 6.5h7a5 5 0 0 1 5 5v1a4 4 0 0 1-7 2.6h-3A4 4 0 0 1 3.5 12.5v-1a5 5 0 0 1 5-5Z"/><path d="M7.6 10.4v2.2M6.5 11.5h2.2M15.4 11h.01M17.2 12.8h.01"/></svg></span><span class="r-eyebrow">Play</span><span class="r-label">Takbo, Mak!</span></button>
       <button type="button" class="roul-item" data-target="p7"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></span><span class="r-eyebrow">Our story</span><span class="r-label">About the Madams</span></button>
       <button type="button" class="roul-item" data-target="p8"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M20.5 14.4a2 2 0 0 1-2 2H8l-4.5 4V5.6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/></svg></span><span class="r-eyebrow">Talk to us</span><span class="r-label">Say Something</span></button>
     </div>
@@ -597,6 +689,12 @@
       <span class="t-body"><span class="t-eyebrow">Bid &amp; win</span><span class="t-label">The Bidding Table</span><span class="t-sub">Signed collectibles</span></span>
     </a>
     --><!-- end of hidden block -->
+    <!-- PLAY — Pee Mak promo game. Remove this heading and the tile below when the campaign ends. -->
+    <div class="grp-head" data-panel="p9"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M8.5 6.5h7a5 5 0 0 1 5 5v1a4 4 0 0 1-7 2.6h-3A4 4 0 0 1 3.5 12.5v-1a5 5 0 0 1 5-5Z"/><path d="M7.6 10.4v2.2M6.5 11.5h2.2M15.4 11h.01M17.2 12.8h.01"/></svg></span><span class="g-label">Play</span><span class="g-rule"></span></div>
+    <a data-panel="p9" class="tile wide compact rise" style="animation-delay:0.67s" href="https://madamsofwilbea.github.io/takbo-mak/">
+      <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M8.5 6.5h7a5 5 0 0 1 5 5v1a4 4 0 0 1-7 2.6h-3A4 4 0 0 1 3.5 12.5v-1a5 5 0 0 1 5-5Z"/><path d="M7.6 10.4v2.2M6.5 11.5h2.2M15.4 11h.01M17.2 12.8h.01"/></svg></span></span>
+      <span class="t-main"><span class="t-eyebrow">Fan game</span><span class="t-label">Takbo, Mak!</span><span class="t-sub">She's reaching. Keep running.</span></span>
+    </a>
     <div class="grp-head" data-panel="p7"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></span><span class="g-label">Our Story</span><span class="g-rule"></span></div>
     <a data-panel="p7" class="tile wide compact rise" style="animation-delay:0.70s" href="https://madamsofwilbea.github.io/about/">
       <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></span></span>
