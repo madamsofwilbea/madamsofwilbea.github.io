@@ -403,6 +403,16 @@
 
   @media(max-width:360px){ .tile .t-label{ font-size:18px; } .tile.wide .t-label{ font-size:21px; } }
 
+  /* --- "more coming" teaser: a tile that isn't a link --- */
+  .tile.soon{ background:linear-gradient(150deg, rgba(31,74,44,.16), rgba(46,93,58,.10) 60%);
+              border-style:dashed; border-color:rgba(218,167,90,.75); box-shadow:none;
+              color:var(--green-deep); cursor:default; }
+  .tile.soon:hover, .tile.soon:focus-visible{ transform:none; filter:none; box-shadow:none; }
+  .tile.soon .t-label{ color:var(--green-deep); }
+  .tile.soon .t-sub{ color:rgba(35,71,44,.68); }
+  .tile.soon .t-eyebrow{ color:#B8873C; }
+  .tile.soon .t-ic{ background:rgba(218,167,90,.12); border-color:rgba(218,167,90,.6); color:#B8873C; }
+
   /* ---------- Footer ---------- */
   footer{
     text-align:center;
@@ -573,6 +583,10 @@
   }
   body[data-skin="peemak"] .tile:hover,
   body[data-skin="peemak"] .tile:focus-visible{ box-shadow:0 16px 34px rgba(218,167,90,.26) }
+  body[data-skin="peemak"] .tile.soon{ background:rgba(15,42,26,.45); border-color:rgba(218,167,90,.55); box-shadow:none; color:#F7F4EC }
+  body[data-skin="peemak"] .tile.soon:hover{ box-shadow:none }
+  body[data-skin="peemak"] .tile.soon .t-label{ color:#F7F4EC }
+  body[data-skin="peemak"] .tile.soon .t-sub{ color:#9DB0A2 }
   /* the WilBea calendar */
   body[data-skin="peemak"] .cal-item{ background:#0F2A1A; border-color:rgba(218,167,90,.28) }
   body[data-skin="peemak"] a.cal-item:hover{ box-shadow:0 4px 12px rgba(0,0,0,.4) }
@@ -700,6 +714,14 @@
       <span class="t-top"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M4 13.5h16M6.2 13.5V10a5.8 5.8 0 0 1 11.6 0v3.5"/><path d="M9.4 17.2v3.3M14.6 17.2v3.3M12 13.5v7"/></svg></span></span>
       <span class="t-body"><span class="t-eyebrow">Fan game</span><span class="t-label">Whack-a-Nang</span><span class="t-sub">She's at the window. Every window.</span></span>
     </a>
+    <a data-panel="p9" class="tile rise" style="animation-delay:0.73s" href="https://madamsofwilbea.github.io/barkada-crush/">
+      <span class="t-top"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M4.2 4.2h6.1v6.1H4.2zM13.7 13.7h6.1v6.1h-6.1z"/><path d="M16.75 3.9a3.05 3.05 0 1 1 0 6.1 3.05 3.05 0 0 1 0-6.1ZM7.25 13.9a3.05 3.05 0 1 1 0 6.1 3.05 3.05 0 0 1 0-6.1Z"/></svg></span></span>
+      <span class="t-body"><span class="t-eyebrow">Fan game</span><span class="t-label">Barkada Crush</span><span class="t-sub">Match the barkada, beat the clock.</span></span>
+    </a>
+    <div data-panel="p9" class="tile soon rise" style="animation-delay:0.76s">
+      <span class="t-top"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M12 4.4l1.7 4.5 4.5 1.7-4.5 1.7L12 16.8l-1.7-4.5L5.8 10.6l4.5-1.7z"/><path d="M18.3 15.6l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/></svg></span></span>
+      <span class="t-body"><span class="t-eyebrow">Abangan</span><span class="t-label">More games to come…</span><span class="t-sub">She's not done with you yet.</span></span>
+    </div>
     <div class="grp-head" data-panel="p7"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></span><span class="g-label">Our Story</span><span class="g-rule"></span></div>
     <a data-panel="p7" class="tile wide compact rise" style="animation-delay:0.70s" href="https://madamsofwilbea.github.io/about/">
       <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></span></span>
