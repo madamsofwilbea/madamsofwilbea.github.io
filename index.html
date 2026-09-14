@@ -303,6 +303,19 @@
   .cal-toggle:hover{color:#0C3125;text-decoration-color:#0C3125}
   .cal-toggle:focus-visible{outline:2px solid #2E5D3A;outline-offset:3px;border-radius:4px}
 
+  /* --- event feedback link, under the official events --- */
+  .fb-card{
+    display:block;text-decoration:none;margin-bottom:12px;padding:15px 16px;border-radius:16px;
+    background:linear-gradient(150deg, rgba(218,167,90,.18), rgba(218,167,90,.07) 70%);
+    border:1px solid rgba(218,167,90,.6);
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .fb-card:hover{border-color:#DAA75A;box-shadow:0 6px 18px rgba(218,167,90,.22);transform:translateY(-1px)}
+  .fb-eyebrow{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#B8873C;margin-bottom:5px}
+  .fb-title{display:block;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#0C3125;margin-bottom:3px}
+  .fb-sub{display:block;font-size:12.5px;line-height:1.55;color:#3a4740}
+  .fb-go{display:block;margin-top:9px;font-size:11.5px;font-weight:700;letter-spacing:.3px;color:#2E5D3A}
+
 
   /* Several events on one day share a single block */
   .cal-entry{display:block;text-decoration:none}
@@ -597,6 +610,11 @@
   body[data-skin="peemak"] .cal-meta{ color:#9DB0A2 }
   body[data-skin="peemak"] .cal-empty{ background:rgba(15,42,26,.55); border-color:rgba(218,167,90,.25); color:#9DB0A2 }
   body[data-skin="peemak"] .cal-toggle{ color:var(--gold-soft) }
+  body[data-skin="peemak"] .fb-card{ background:linear-gradient(150deg, rgba(218,167,90,.16), rgba(15,42,26,.5) 70%); border-color:rgba(218,167,90,.5) }
+  body[data-skin="peemak"] .fb-title{ color:#F5EFE0 }
+  body[data-skin="peemak"] .fb-sub{ color:#9DB0A2 }
+  body[data-skin="peemak"] .fb-eyebrow,
+  body[data-skin="peemak"] .fb-go{ color:var(--gold-soft) }
   body[data-skin="peemak"] .cal-toggle:hover{ color:#F7F4EC; text-decoration-color:#F7F4EC }
   /* say something */
   body[data-skin="peemak"] .say-card{ background:rgba(15,42,26,.72); border-color:rgba(218,167,90,.30) }
@@ -740,6 +758,14 @@
       <span class="g-label">Say Something</span><span class="g-rule"></span>
     </div>
 
+    <!-- EVENT FEEDBACK — generic page, re-skinned for whichever event was most recent. Wording stays event-neutral so the hub never needs editing. -->
+    <a class="fb-card rise" href="https://madamsofwilbea.github.io/events-feedback/">
+      <span class="fb-eyebrow">Event feedback</span>
+      <span class="fb-title">How did we do?</span>
+      <span class="fb-sub">Just came from one of our events? Tell us how it went — what you loved, what we could do better.</span>
+      <span class="fb-go">Open the feedback form →</span>
+    </a>
+
     <div class="say-card">
       <div id="sayForm">
         <p class="say-intro">A kind word, an idea, or something we could do better — we read every one. You don't have to leave your name.</p>
@@ -773,6 +799,7 @@
         <button class="say-send" id="saySend">Send it to the Circle</button>
         <p class="say-note">Suggestions and anything you'd like fixed always stay private.</p>
       </div>
+
 
       <div class="say-done" id="sayDone">
         <h3>Thank you, Madam 💚</h3>
