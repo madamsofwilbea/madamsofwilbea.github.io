@@ -319,6 +319,15 @@
   .fb-sub{display:block;font-size:12.5px;line-height:1.55;color:#3a4740}
   .fb-go{display:block;margin-top:9px;font-size:11.5px;font-weight:700;letter-spacing:.3px;color:#2E5D3A}
 
+  /* --- live "polls open" badge on the Fandom Pulse tile --- */
+  .pulse-badge{
+    display:inline-block;vertical-align:3px;margin-left:8px;
+    font-family:'Lato',sans-serif;font-size:9.5px;font-weight:900;letter-spacing:1.1px;
+    text-transform:uppercase;padding:3px 9px;border-radius:99px;
+    background:#DAA75A;color:#23472C;
+  }
+  .pulse-badge.quiet{background:rgba(247,244,236,.16);color:#E8C989;border:1px solid rgba(232,201,137,.45)}
+
 
 
   /* Several events on one day share a single block */
@@ -617,6 +626,7 @@
   body[data-skin="peemak"] .fb-card{ background:linear-gradient(150deg, rgba(218,167,90,.16), rgba(15,42,26,.5) 70%); border-color:rgba(218,167,90,.5) }
   body[data-skin="peemak"] .fb-title{ color:#F5EFE0 }
   body[data-skin="peemak"] .fb-sub{ color:#9DB0A2 }
+  body[data-skin="peemak"] .pulse-badge{ background:#DAA75A; color:#07190F }
   body[data-skin="peemak"] .fb-eyebrow,
   body[data-skin="peemak"] .fb-go{ color:var(--gold-soft) }
   body[data-skin="peemak"] .cal-toggle:hover{ color:#F7F4EC; text-decoration-color:#F7F4EC }
@@ -661,6 +671,7 @@
     <div class="roul-film">
     <div class="roul-track" id="roulTrack">
       <button type="button" class="roul-item" data-target="p1"><span class="r-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span class="r-eyebrow">Happening now</span><span class="r-label">Madams’ Official Events</span></button>
+      <button type="button" class="roul-item" data-target="p11"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M3 12.2h4.1l2.2-5.6 3.3 11 2.3-5.4h6.1"/></svg></span><span class="r-eyebrow">Vote</span><span class="r-label">The Fandom Pulse</span></button>
       <button type="button" class="roul-item" data-target="p2"><span class="r-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.2" width="17" height="15.3" rx="2.2"/><path d="M8 3.4v3.4M16 3.4v3.4M3.5 10.2h17"/></svg></span><span class="r-eyebrow">Happening now</span><span class="r-label">The WilBea Calendar</span></button>
       <button type="button" class="roul-item" data-target="p4"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M4 18h16M4.6 18 3 8.4l5.2 3.9L12 5l3.8 7.3L21 8.4 19.4 18"/></svg></span><span class="r-eyebrow">Be a Madam</span><span class="r-label">Membership Form</span></button>
       <button type="button" class="roul-item" data-target="p5"><span class="r-ic"><svg viewBox="0 0 24 24"><path d="M12 20.5S4 16 4 10.6A3.9 3.9 0 0 1 12 8.4a3.9 3.9 0 0 1 8 2.2c0 5.4-8 9.9-8 9.9Z"/></svg></span><span class="r-eyebrow">Be a Madam</span><span class="r-label">The Madams’ Vault</span></button>
@@ -700,6 +711,13 @@
 
   <div class="cols">
   <nav data-panel="p3 p4 p5 p6 p7">
+    <!-- THE FANDOM PULSE — polls site. The "polls open" badge fills itself in from the Pulse script; if it can't be reached, no badge shows. -->
+    <div class="grp-head" data-panel="p11"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M3 12.2h4.1l2.2-5.6 3.3 11 2.3-5.4h6.1"/></svg></span><span class="g-label">The Fandom Pulse</span><span class="g-rule"></span></div>
+    <a data-panel="p11" class="tile wide compact rise" style="animation-delay:0.46s" href="https://madamsofwilbea.github.io/fandom-pulse">
+      <span class="t-icwrap"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M3 12.2h4.1l2.2-5.6 3.3 11 2.3-5.4h6.1"/></svg></span></span>
+      <span class="t-main"><span class="t-eyebrow">Have your say</span><span class="t-label">The Fandom Pulse<span class="pulse-badge" id="pulseBadge" hidden></span></span><span class="t-sub">Vote on what happens next</span></span>
+    </a>
+
     <div class="grp-head" data-panel="p4 p5"><span class="g-ic"><svg viewBox="0 0 24 24"><path d="M4 18h16M4.6 18 3 8.4l5.2 3.9L12 5l3.8 7.3L21 8.4 19.4 18"/></svg></span><span class="g-label">Be a Madam</span><span class="g-rule"></span></div>
     <a data-panel="p4" class="tile rise" style="animation-delay:0.52s" href="https://madamsofwilbea.github.io/madams-app-form/">
       <span class="t-top"><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M4 18h16M4.6 18 3 8.4l5.2 3.9L12 5l3.8 7.3L21 8.4 19.4 18"/></svg></span></span>
@@ -1226,6 +1244,38 @@ var WILBEA_EVENTS = [
     };
     requestAnimationFrame(drift);
   }
+
+/* ---------- Fandom Pulse: how many polls are open right now ---------- */
+(function () {
+  var PULSE_URL = 'https://script.google.com/macros/s/AKfycbzvDXNKrm6wySgAhIP9bxOe6ah2Uuw4N8sJxefqN0SYsty7oFMxG3r8vfBTPhJgoYEo/exec';
+  var badge = document.getElementById('pulseBadge');
+  if (!badge || !PULSE_URL) return;
+
+  var CB = 'pulseCount' + Date.now(), answered = false, tries = 0;
+
+  window[CB] = function (d) {
+    answered = true;
+    if (!d || !d.ok || !d.polls || !d.polls.length) return;      // nothing to say: no badge
+    var open = d.polls.filter(function (p) { return !p.closed; }).length;
+    if (open) {
+      badge.textContent = open === 1 ? '1 poll open' : open + ' polls open';
+    } else {
+      badge.textContent = 'Results in';
+      badge.className = 'pulse-badge quiet';
+    }
+    badge.hidden = false;
+  };
+
+  function ask() {
+    tries++;
+    var tag = document.createElement('script');
+    tag.src = PULSE_URL + (PULSE_URL.indexOf('?') > -1 ? '&' : '?') +
+              'view=polls&callback=' + CB + '&_=' + Date.now();
+    tag.onerror = function () { if (!answered && tries < 2) setTimeout(ask, 1500); };
+    document.body.appendChild(tag);
+  }
+  ask();
+})();
 
   var fix = document.getElementById('topfix');
   function pinned() {
