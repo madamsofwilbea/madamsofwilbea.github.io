@@ -150,6 +150,8 @@
   .ev-mon{font-size:10px;letter-spacing:2px;font-weight:900}
   .ev-day{font-family:'Playfair Display',serif;font-size:31px;font-weight:800;line-height:1}
   .ev-day.tba{font-size:19px;letter-spacing:1px}
+  .ev-static{cursor:default}
+  .ev-static:hover{transform:none;box-shadow:none}
   .ev-cd{font-size:9px;font-weight:700;margin-top:3px;opacity:.82;letter-spacing:.3px}
   .ev-body{flex:1;padding:14px 15px;min-width:0}
   .ev-name{font-family:'Playfair Display',serif;font-size:20px;color:#F7F4EC;font-weight:700;margin:0 0 2px}
@@ -700,6 +702,8 @@
       <!-- PEE MAK BLOCK SCREENINGS — one card per screening day. To mark one full, change data-status="" to data-status="soldout". -->
       <a class="ev rise" data-status="soldout" style="animation-delay:0.46s" href="https://madamsofwilbea.github.io/peemak-screening/"><div class="ev-date"><div class="ev-mon">OCT</div><div class="ev-day">14</div><div class="ev-cd" data-date="2026-10-14"></div></div><div class="ev-body"><p class="ev-name">Pee Mak</p><p class="ev-sub">8:00 &amp; 8:30 PM · Director’s Club, The Podium</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M5.5 20.6V10.2a6.5 6.5 0 0 1 13 0v10.4l-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5-2.3-1.5Z"/><path d="M9.7 10.4v1.3M14.3 10.4v1.3"/></svg>Register here →</p></div></a>
       <a class="ev rise" data-status="" style="animation-delay:0.52s" href="https://madamsofwilbea.github.io/peemak-screening/"><div class="ev-date"><div class="ev-mon">OCT</div><div class="ev-day">17</div><div class="ev-cd" data-date="2026-10-17"></div></div><div class="ev-body"><p class="ev-name">Pee Mak</p><p class="ev-sub">2:00 PM · <span class="slot-off"><s>3:00 PM</s> reserved</span> · Director’s Club, SM Aura Premier</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M5.5 20.6V10.2a6.5 6.5 0 0 1 13 0v10.4l-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5-2.3-1.5Z"/><path d="M9.7 10.4v1.3M14.3 10.4v1.3"/></svg>Register here →</p></div></a>
+      <!-- YEAR END PARTY — December, venue and date not set. When confirmed: put the day number in ev-day (drop the tba class), set the real date in data-date, delete data-tba="true", and make it a link if there's a registration page. -->
+      <div class="ev ev-static rise" data-status="" data-tba="true" style="animation-delay:0.58s"><div class="ev-date"><div class="ev-mon">DEC</div><div class="ev-day tba">TBA</div><div class="ev-cd" data-date="2026-12-31"></div></div><div class="ev-body"><p class="ev-name">Year End Party</p><p class="ev-sub">Venue to be announced</p><p class="ev-go"><svg class="ev-ic" viewBox="0 0 24 24"><path d="M5.6 20.4 10 9.2l4.8 4.8-9.2 6.4Z"/><path d="M14.4 3.6v2M19 6.2l-1.5 1.5M20.4 11.4h-2M9.9 5.1l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2z"/></svg>Details to follow</p></div></div>
       </div>
       </div>
       <div class="now-col" data-panel="p2">
@@ -1044,8 +1048,8 @@ var WILBEA_EVENTS = [
   { who:"wil", date:"2026-09-13", name:"The Emerald Gala \u2014 Madams of WilBea Anniversary Celebration",
     where:"One San Miguel, Ortigas Center, Pasig", link:"" },
 
-  { who:"wil", date:"2026-09-25", name:"Onsite Ticket Selling: WR10 by Wilbert Ross \u2014 Cebu",
-    where:"Cebu", link:"" },
+  { who:"wil", date:"2026-09-25", name:"WR10 Ticket Selling with Wilbert Ross",
+    where:"1:30 PM \u00b7 Waterfront Cebu Hotel \u0026 Casino", link:"" },
 
   { who:"wil", date:"2026-09-27", name:"Ticket Selling: WR10 by Wilbert Ross \u2014 South (Laguna)",
     where:"Ticketnet Outlets", link:"" },
@@ -1053,8 +1057,29 @@ var WILBEA_EVENTS = [
   { who:"wil", date:"2026-09-29", name:"Wilbert Ross on Wish Bus",
     where:"Araneta, Cubao", link:"" },
 
+  { who:"both", date:"2026-10-03", name:"PEE MAK Grand Mall Show",
+    where:"Market, Market! Taguig", link:"" },
+
+  { who:"both", date:"2026-10-06", name:"PEE MAK University Screening",
+    where:"October 6\u20137 \u00b7 Venue to be announced", link:"" },
+
+  { who:"both", date:"2026-10-08", name:"PEE MAK Advance Screening",
+    where:"Venue to be announced", link:"" },
+
+  { who:"both", date:"2026-10-09", name:"PEE MAK Talkback Screening",
+    where:"Venue to be announced", link:"" },
+
   { who:"wil", date:"2026-10-10", name:"WR10 by Wilbert Ross \u2014 Cebu",
     where:"10th Anniversary Homecoming Concert \u00b7 Waterfront Cebu City Hotel", link:"" },
+
+  { who:"both", date:"2026-10-11", name:"PEE MAK Grand Mall Show",
+    where:"Cebu", link:"" },
+
+  { who:"both", date:"2026-10-12", name:"PEE MAK Premiere Night",
+    where:"Venue to be announced", link:"" },
+
+  { who:"both", date:"2026-10-14", name:"PEE MAK Opening Day",
+    where:"Cinemas nationwide", link:"" },
 
   { who:"bea", date:"2026-10-24", name:"EC-VIT Hunt with Bea",
     where:"Selected Mercury Drug branches", link:"" },
